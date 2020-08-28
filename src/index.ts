@@ -24,5 +24,6 @@ export * from './jsosTransformer/types';
 export * from './jsosTransformer/context/createTransformerContext';
 export * from './jsosTransformer/context/findByPath';
 export * from './jsosTransformer/context/parseValue';
+export * from './jsosTransformer/context/parseValue/types';
 export * from './jsosTransformer/context/writer';
 export * from './jsosTransformer/transformers';

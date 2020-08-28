@@ -1,6 +1,6 @@
 {
   "name": "@micra/jsos",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Olavo Amorim Santos<contact@micra.dev>",
   "license": "MIT",
   "main": ".micra/index.cjs.js",
