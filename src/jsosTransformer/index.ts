@@ -11,7 +11,7 @@ export const jsosTransformer: JSOSTransformer = <T = Record<string, any>>(
 
   for (const element of elements) {
     if (context.transformers[element.type]) {
-      context.transformers[element.type](element, context);
+      context.transformers[element.type](element, context, options);
     }
   }
 

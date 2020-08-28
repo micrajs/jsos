@@ -17,8 +17,9 @@ export const defaultTransformers: Record<
   JSOSParserElementType,
   JSOSTransformerFunction
 > = {
-  [NODE_TYPE](element, context) {
+  [NODE_TYPE](element, context, options) {
     context.transform((element as JSOSParserNodeElement).value, {
+      ...options,
       context,
       transformers: context.transformers,
     });
@@ -29,8 +30,9 @@ export const defaultTransformers: Record<
   [NUMERIC_TYPE]() {
     //
   },
-  [LIST_TYPE](element, context) {
+  [LIST_TYPE](element, context, options) {
     context.transform((element as JSOSParserListElement).value, {
+      ...options,
       context,
       transformers: context.transformers,
     });
