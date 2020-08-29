@@ -10,13 +10,14 @@ export const parseValue: ParseValueGenerator = (
   return (value, visitors = {}) => {
     if (typeof value === 'string' && value.includes('::')) {
       const [fn, ...args] = value.split('::');
-
       if (parsers[fn]) {
         const fnArgs: ParserArgs = [
           ...args
             .join('::')
             .split('|')
-            .map((a) => parseValue(context)(a, visitors) as string),
+            .map(
+              (a) => parseValue(context, customParsers)(a, visitors) as string,
+            ),
           context,
         ];
 

@@ -17,7 +17,10 @@ export const get = (context: JSOSParserContext) => (
 ): JSOSParserValueDefinition => {
   let definition = context.raw;
   for (const key of path.split('.')) {
-    if (isPrimitive(definition)) {
+    if (
+      isPrimitive(definition) ||
+      (typeof definition !== 'function' && !definition[key])
+    ) {
       return path;
     }
 

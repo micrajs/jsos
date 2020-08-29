@@ -6,12 +6,12 @@ export type JSOSParserElementType =
   | 'BooleanType'
   | 'NullishType';
 
-export interface JSOSParserContext {
+export type JSOSParserContext<T = Record<string, any>> = T & {
   raw: JSOSParserDefinition;
   breadcrumbs: string;
   resolvers: JSOSParserResolver[];
   get(path: string): JSOSParserValueDefinition;
-}
+};
 
 export type JSOSParserDynamicDefinition = (
   context: JSOSParserContext,

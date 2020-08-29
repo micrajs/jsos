@@ -7,7 +7,13 @@ export const jsosTransformer: JSOSTransformer = <T = Record<string, any>>(
   options: Partial<JSOSTransformerOptions<T>> = {},
 ) => {
   const context = createTransformerContext(elements, options);
-  context.transform = jsosTransformer;
+  context.transform = <T = any>(
+    el: JSOSParserElement[],
+    op: Partial<JSOSTransformerOptions<T>> = {},
+  ) =>
+    jsosTransformer(el, { ...options, ...op } as Partial<
+      JSOSTransformerOptions<T>
+    >);
 
   for (const element of elements) {
     if (context.transformers[element.type]) {

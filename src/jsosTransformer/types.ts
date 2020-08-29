@@ -17,13 +17,15 @@ export interface JSOSTransformerContext {
 
 export type JSOSTransformerFunction<T = any> = (
   element: JSOSParserElement,
-  context: JSOSTransformerContext,
+  context: JSOSTransformerContext & T,
   options?: Partial<JSOSTransformerOptions<T>>,
 ) => void;
 
 export interface JSOSTransformerOptions<T = Record<string, any>> {
   valueParsers: Record<string, ValueParser>;
-  transformers: Partial<Record<JSOSParserElementType, JSOSTransformerFunction<T>>>;
+  transformers: Partial<
+    Record<JSOSParserElementType, JSOSTransformerFunction<T>>
+  >;
   makeContext?(context: JSOSTransformerContext): T;
   context: JSOSTransformerContext | (JSOSTransformerContext & T);
 }

@@ -24,6 +24,6 @@ export const createTransformerContext = <T>(
   };
 
   return options.makeContext
-    ? { ...options.makeContext(context), ...context }
+    ? { ...context, ...options.makeContext(context) }
     : context;
 };
