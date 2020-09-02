@@ -38,6 +38,13 @@ export interface JSOSParserNode {
   [key: number]: JSOSParserDefinition;
 }
 
+export interface JSOSParserRootElement {
+  type: 'NodeType';
+  path: '';
+  parent?: JSOSParserElement;
+  value: JSOSParserElement[];
+}
+
 export interface JSOSParserNodeElement {
   type: 'NodeType';
   path: string;
@@ -79,6 +86,13 @@ export interface JSOSParserNullishElement {
   parent?: JSOSParserElement;
   value: null;
 }
+
+export type JSOSParentElement = JSOSParserNodeElement | JSOSParserListElement;
+export type JSOSPrimitiveElement =
+  | JSOSParserStringElement
+  | JSOSParserNumericElement
+  | JSOSParserNullishElement
+  | JSOSParserBooleanElement;
 
 export type JSOSParserElement =
   | JSOSParserNodeElement

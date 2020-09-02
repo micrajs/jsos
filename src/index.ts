@@ -1,8 +1,9 @@
 /* istanbul ignore file */
 export const PKG = '@micra/jsos';
 export const NAME = 'jsos';
-export const VERSION = '0.0.1';
+export const VERSION = '0.0.5';
 
+export * from './helpers';
 export * from './jsosParser';
 export * from './jsosParser/constants';
 export * from './jsosParser/types';
