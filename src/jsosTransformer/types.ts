@@ -1,3 +1,4 @@
+import { Content } from '../content/types';
 import { JSOSParserElement, JSOSParserElementType } from '../jsosParser/types';
 import { ParseValue, ValueParser } from './context/parseValue/types';
 
@@ -6,9 +7,7 @@ export interface JSOSTransformerContext {
   transform: JSOSTransformer;
   transformers: Record<JSOSParserElementType, JSOSTransformerFunction>;
   parseValue: ParseValue;
-  content(): string;
-  prepend(value: string): string;
-  append(value: string): string;
+  content: Content<string | Record<string | number, any>>;
   findByPath(
     path: string,
     elements?: JSOSParserElement[],
@@ -28,9 +27,10 @@ export interface JSOSTransformerOptions<T = Record<string, any>> {
   >;
   makeContext?(context: JSOSTransformerContext): T;
   context: JSOSTransformerContext | (JSOSTransformerContext & T);
+  initialValue?: string | Record<string | number, any>;
 }
 
-export type JSOSTransformer = <T = Record<string, any>>(
+export type JSOSTransformer = <T = Record<string, any>, R = string | Record<string | number, any>>(
   elements: JSOSParserElement[],
   options?: Partial<JSOSTransformerOptions<T>>,
-) => string;
+) => R;

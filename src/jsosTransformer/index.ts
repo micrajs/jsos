@@ -2,10 +2,10 @@ import { createTransformerContext } from './context/createTransformerContext';
 import { JSOSParserElement } from '../jsosParser/types';
 import { JSOSTransformer, JSOSTransformerOptions } from './types';
 
-export const jsosTransformer: JSOSTransformer = <T = Record<string, any>>(
+export const jsosTransformer: JSOSTransformer = <T = Record<string, any>, R = string | Record<string | number, any>>(
   elements: JSOSParserElement[],
   options: Partial<JSOSTransformerOptions<T>> = {},
-) => {
+): R => {
   const context = createTransformerContext(elements, options);
   context.transform = <T = any>(
     el: JSOSParserElement[],
@@ -21,5 +21,5 @@ export const jsosTransformer: JSOSTransformer = <T = Record<string, any>>(
     }
   }
 
-  return context.content();
+  return context.content.value as R;
 };

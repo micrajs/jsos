@@ -1,6 +1,6 @@
-<div align="center">
+<p align="center">
   <img src="https://raw.githubusercontent.com/micrajs/jsos/latest/.config/assets/logo.png" width="25%">
-</div>
+</p>
 
 <h1 align="center">JSOS - JavaScript Object Schema</h1>
 
@@ -159,8 +159,8 @@ To transform the tree, you can pass transformer functions to through the option 
 const elements = jsosParser(definitions);
 const content = jsosTransformer(elements, {
   transformers: {
-    [STRING_TYPE](element, { append, parseValue }) {
-      append(
+    [STRING_TYPE](element, { content, parseValue }) {
+      content.append(
         `--${element.path.split('.').join('-').toLowerCase()}: ${parseValue(
           element.value,
         )};`,
@@ -186,6 +186,7 @@ interface JSOSTransformerOptions<T = Record<string, any>> {
   >;
   makeContext?(context: JSOSTransformerContext): T;
   context: JSOSTransformerContext | (JSOSTransformerContext & T);
+  initialValue: string | Record<string, any>;
 }
 ```
 
@@ -197,9 +198,7 @@ interface JSOSTransformerContext {
   transform: JSOSTransformer;
   transformers: Record<JSOSParserElementType, JSOSTransformerFunction>;
   parseValue: ParseValue;
-  content(): string;
-  prepend(value: string): string;
-  append(value: string): string;
+  content: Content;
   findByPath(
     path: string,
     elements?: JSOSParserElement[],
@@ -207,28 +206,46 @@ interface JSOSTransformerContext {
 }
 ```
 
+The content is a class that contains the transpiled content. To modify the content you can use:
+
+```typescript
+// If the initialValue is a string or undefined
+interface StringContent {
+  value: string;
+  append(value: string): this;
+  prepend(value: string): this;
+}
+
+// If the initialValue is an object
+interface ObjectContent {
+  value: Record<string, any>;
+  append(path: string, value: any): this;
+  prepend(path: string, value: any): this;
+}
+```
+
 ## Test coverage
 
 <table style="width:100%">
   <tr>
-      <td>92.18% </td>
+      <td>92.55% </td>
       <td>Statements</td>
-      <td>271/294</td>
+      <td>298/322</td>
   </tr>
   <tr>
-      <td>71.86% </td>
+      <td>73.77% </td>
       <td>Branches</td>
-      <td>120/167</td>
+      <td>135/183</td>
   </tr>
   <tr>
-      <td>80.88% </td>
+      <td>83.56% </td>
       <td>Functions</td>
-      <td>55/68</td>
+      <td>61/73</td>
   </tr>
   <tr>
-      <td>91.97% </td>
+      <td>92.39% </td>
       <td>Lines</td>
-      <td>229/249</td>
+      <td>255/276</td>
   </tr>
 </table>
 

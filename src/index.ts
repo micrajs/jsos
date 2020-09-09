@@ -1,8 +1,11 @@
 /* istanbul ignore file */
 export const PKG = '@micra/jsos';
 export const NAME = 'jsos';
-export const VERSION = '0.0.5';
+export const VERSION = '0.0.6';
 
+export * from './content/ObjectContent';
+export * from './content/StringContent';
+export * from './content/types';
 export * from './helpers';
 export * from './jsosParser';
 export * from './jsosParser/constants';
@@ -26,5 +29,4 @@ export * from './jsosTransformer/context/createTransformerContext';
 export * from './jsosTransformer/context/findByPath';
 export * from './jsosTransformer/context/parseValue';
 export * from './jsosTransformer/context/parseValue/types';
-export * from './jsosTransformer/context/writer';
 export * from './jsosTransformer/transformers';

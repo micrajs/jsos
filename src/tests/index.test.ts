@@ -15,8 +15,8 @@ describe('integration tests', () => {
     const elements = jsosParser(definitions);
     const content = jsosTransformer(elements, {
       transformers: {
-        [STRING_TYPE](element, { append, parseValue }) {
-          append(
+        [STRING_TYPE](element, { content, parseValue }) {
+          content.append(
             `--${element.path.split('.').join('-').toLowerCase()}: ${parseValue(
               element.value,
             )};`,

@@ -9,6 +9,32 @@ import {
 } from '../constants';
 
 describe('jsosParser tests', () => {
+  describe('options tests', () => {
+    it('should accept a set of initial elements', () => {
+      const elements = jsosParser('value', {
+        elements: [
+          {
+            type: STRING_TYPE,
+            path: '',
+            value: 'initial value',
+          },
+        ],
+      });
+
+      expect(elements).toMatchObject([
+        {
+          type: STRING_TYPE,
+          path: '',
+          value: 'initial value',
+        },
+        {
+          type: STRING_TYPE,
+          path: '',
+          value: 'value',
+        },
+      ]);
+    });
+  });
   describe('parser types tests', () => {
     it('should parse a string type', () => {
       const elements = jsosParser('value');
